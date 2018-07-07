@@ -7,13 +7,15 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <div class="content">
+        <div class="content" oncontextmenu="return false">
             <div id="campo">
                 
             </div>
         </div>
+        <!--Scripts-->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
-        
         <script type="text/javascript">
             //colocar_bombas(1,20,20);
             //colocar_numeros();
@@ -35,10 +37,14 @@
             campo_minado.colocar_numeros();
             campo_minado.agrupar_vazios();
             console.table(campo_minado.casas);
+
+            $('.pixel').on('mousedown',function(ev){
+                if(ev.which === 3){
+                    var pixel = ev.currentTarget.id;
+                    campo_minado.bandeira(pixel);
+                }
+            });
         </script>
-        <!--Scripts-->
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
 </html>
 <style>
@@ -50,10 +56,59 @@
     .pixel{
         width: 25px;
         height: 25px;
-        background-color: grey;
-        border:4px solid #4F4E4E;
+        background-image:url('sprite/closed.svg');
+        background-size:100%;
         line-height: 15px;
         text-align: center;
         user-select: none;
     }
+    .flag{
+        background-image:url('sprite/flag.svg');
+        background-size:100%;
+    }
+    .t0{
+        background-image:url('sprite/type0.svg');
+        background-size:100%;
+    }
+    .t1{
+        background-image:url('sprite/type1.svg');
+        background-size:100%;
+    }
+    .t2{
+        background-image:url('sprite/type2.svg');
+        background-size:100%;
+    }
+    .t3{
+        background-image:url('sprite/type3.svg');
+        background-size:100%;
+    }
+    .t4{
+        background-image:url('sprite/type4.svg');
+        background-size:100%;
+    }
+    .t5{
+        background-image:url('sprite/type5.svg');
+        background-size:100%;
+    }
+    .t6{
+        background-image:url('sprite/type6.svg');
+        background-size:100%;
+    }
+    .t7{
+        background-image:url('sprite/type7.svg');
+        background-size:100%;
+    }
+    .t8{
+        background-image:url('sprite/type8.svg');
+        background-size:100%;
+    }
+    .t9{
+        background-image:url('sprite/type9.svg');
+        background-size:100%;
+    }
+    .mine{
+        background-image:url('sprite/mine.svg');
+        background-size:100%;
+    }
+
 </style>

@@ -43,7 +43,7 @@ var campo_minado = class{
         }
     }
     fim(){
-        window.location = "index.html";
+        //window.location = "index.html";
     }
     
     colocar_bombas(dif,x,y){
@@ -388,15 +388,13 @@ var campo_minado = class{
     mostrar_casa(nome,y,x){
         var pixel = document.getElementById(nome);
         console.log(y,x);
-        pixel.innerHTML = this.icone_cor_casas(this.casas[y][x]);
+        this.icone_cor_casas(this.casas[y][x],pixel);
 
         if(this.casas[y][x] == "B"){
-            pixel.style = "background-color: #ff0000; border: 4px solid #7f0303;";
             alert('Fim de jogo!');
             this.fim();
         }else if(this.casas[y][x] == 0){
             //this.casas_perto(y,x);
-            pixel.style = "background-color: #b4b3b3; border: 4px solid grey;";
             
             //Meio Superior
             if((y - 1) < 1){
@@ -435,35 +433,21 @@ var campo_minado = class{
             }
         }else{
             //this.casas_perto(y,x);
-            pixel.style = "background-color: #b4b3b3; border: 4px solid grey;";
         }
+    }
+    bandeira(id){
+        var elem = document.getElementById(id);
+        elem.setAttribute('class','pixel flag');
     }
 
     
-    icone_cor_casas(valor){
+    icone_cor_casas(valor,elem){
         if(valor == "B"){
-            return "<i class='material-icons tiny'>settings</i>";
-        }else if(valor == 0){
-            return '';
-        }else if(valor == 1){
-            return "<e style='color: #119a9a'>"+valor+"</e>";
-        }else if(valor == 2){
-            return "<e style='color: blue'>"+valor+"</e>";
-        }else if(valor == 3){
-            return "<e style='color: green'>"+valor+"</e>";
-        }else if(valor == 4){
-            return "<e style='color: orange'>"+valor+"</e>";
-        }else if(valor == 5){
-            return "<e style='color: red'>"+valor+"</e>";
-        }else if(valor == 6){
-            return "<e style='color: purple'>"+valor+"</e>";
-        }else if(valor == 7){
-            return "<e style='color: black'>"+valor+"</e>";
-        }else if(valor == 8){
-            return "<e style='color: brown'>"+valor+"</e>";
+            elem.setAttribute('class','pixel mine');
+        }else if(valor != 'p'){
+            elem.setAttribute('class','pixel t'+valor);
         }else{
             return "Erro";
         }
-        this.reload();
     }
 }
