@@ -79,6 +79,41 @@ var campo_minado = class{
             }
             c++;
         }
+        this.atualizar_display();
+    }
+    atualizar_display(){
+        var bombinhas = this.qt_bomba;
+        bombinhas = String(bombinhas);
+        if(bombinhas.length <= 3){
+            var array = bombinhas.split("");
+            console.log(array.length);
+            var i = 1;
+
+            if(array.length < 3){
+                if(array.length < 2){
+                    var d = document.getElementById('d'+2);
+                    d.setAttribute('class','d d0');
+                    i++;
+                }
+                var d = document.getElementById('d'+1);
+                d.setAttribute('class','d d0');
+                i++;
+            }
+            console.log(i);
+
+            while(i <= array.length){
+                var d = document.getElementById('d'+i);
+                console.log(d);
+
+                d.setAttribute('class','d d'+array[i-1]);
+
+                i++;
+            }
+
+        }else{
+            alert('Ocorreu um problema com a quantidade de bombas!');
+            window.location = "index.html";
+        }
     }
 
     colocar_numeros(){
@@ -438,6 +473,9 @@ var campo_minado = class{
     bandeira(id){
         var elem = document.getElementById(id);
         elem.setAttribute('class','pixel flag');
+
+        this.qt_bomba--;
+        atualizar_display.atualizar_display();
     }
 
     

@@ -3,19 +3,34 @@
     <head>
         <link href="css/material_icons.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8">
     </head>
     <body>
+        <div class="menu">
+            <div class="bombas">
+                <div class="dh"></div>
+                <div id="d1" class="d d0"></div>
+                <div id="d2" class="d d0"></div>
+                <div id="d3" class="d d0"></div>
+            </div>
+            <div class="reset">
+
+            </div>
+            <div class="cliques">
+                
+            </div>
+        </div>
         <div class="content" oncontextmenu="return false">
             <div id="campo">
                 
             </div>
         </div>
         <!--Scripts-->
+        <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript">
             //colocar_bombas(1,20,20);
             //colocar_numeros();
@@ -47,68 +62,3 @@
         </script>
     </body>
 </html>
-<style>
-    #campo{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    .pixel{
-        width: 25px;
-        height: 25px;
-        background-image:url('sprite/closed.svg');
-        background-size:100%;
-        line-height: 15px;
-        text-align: center;
-        user-select: none;
-    }
-    .flag{
-        background-image:url('sprite/flag.svg');
-        background-size:100%;
-    }
-    .t0{
-        background-image:url('sprite/type0.svg');
-        background-size:100%;
-    }
-    .t1{
-        background-image:url('sprite/type1.svg');
-        background-size:100%;
-    }
-    .t2{
-        background-image:url('sprite/type2.svg');
-        background-size:100%;
-    }
-    .t3{
-        background-image:url('sprite/type3.svg');
-        background-size:100%;
-    }
-    .t4{
-        background-image:url('sprite/type4.svg');
-        background-size:100%;
-    }
-    .t5{
-        background-image:url('sprite/type5.svg');
-        background-size:100%;
-    }
-    .t6{
-        background-image:url('sprite/type6.svg');
-        background-size:100%;
-    }
-    .t7{
-        background-image:url('sprite/type7.svg');
-        background-size:100%;
-    }
-    .t8{
-        background-image:url('sprite/type8.svg');
-        background-size:100%;
-    }
-    .t9{
-        background-image:url('sprite/type9.svg');
-        background-size:100%;
-    }
-    .mine{
-        background-image:url('sprite/mine.svg');
-        background-size:100%;
-    }
-
-</style>

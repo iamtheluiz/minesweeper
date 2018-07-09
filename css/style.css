@@ -1,0 +1,121 @@
+#campo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.bombas{
+    width: 61.5px;
+    height: 37.5px;
+    background-image:url('../sprite/nums_background.svg');
+    background-size: 100%;
+}
+.pixel{
+    width: 25px;
+    height: 25px;
+    background-image:url('../sprite/closed.svg');
+    background-size:100%;
+    line-height: 15px;
+    text-align: center;
+    user-select: none;
+}
+.flag{
+    background-image:url('../sprite/flag.svg');
+    background-size:100%;
+}
+.t0{
+    background-image:url('../sprite/type0.svg');
+    background-size:100%;
+}
+.t1{
+    background-image:url('../sprite/type1.svg');
+    background-size:100%;
+}
+.t2{
+    background-image:url('../sprite/type2.svg');
+    background-size:100%;
+}
+.t3{
+    background-image:url('../sprite/type3.svg');
+    background-size:100%;
+}
+.t4{
+    background-image:url('../sprite/type4.svg');
+    background-size:100%;
+}
+.t5{
+    background-image:url('../sprite/type5.svg');
+    background-size:100%;
+}
+.t6{
+    background-image:url('../sprite/type6.svg');
+    background-size:100%;
+}
+.t7{
+    background-image:url('../sprite/type7.svg');
+    background-size:100%;
+}
+.t8{
+    background-image:url('../sprite/type8.svg');
+    background-size:100%;
+}
+.dh{
+   height: 31.5px;
+   width: 3px;
+   float:left;
+}
+.d{
+    width: 16.5px;
+    height: 31.5px;
+    user-select: none;
+    float:left;
+    margin-right: 3px;
+    margin-top:3px;
+}
+.d-{
+    background-image:url('../sprite/d-.svg');
+    background-size:100%;
+}
+.d0{
+    background-image:url('../sprite/d0.svg');
+    background-size:100%;
+}
+.d1{
+    background-image:url('../sprite/d1.svg');
+    background-size:100%;
+}
+.d2{
+    background-image:url('../sprite/d2.svg');
+    background-size:100%;
+}
+.d3{
+    background-image:url('../sprite/d3.svg');
+    background-size:100%;
+}
+.d4{
+    background-image:url('../sprite/d4.svg');
+    background-size:100%;
+}
+.d5{
+    background-image:url('../sprite/d5.svg');
+    background-size:100%;
+}
+.d6{
+    background-image:url('../sprite/d6.svg');
+    background-size:100%;
+}
+.d7{
+    background-image:url('../sprite/d7.svg');
+    background-size:100%;
+}
+.d8{
+    background-image:url('../sprite/d8.svg');
+    background-size:100%;
+}
+.d9{
+    background-image:url('../sprite/d9.svg');
+    background-size:100%;
+}
+.mine{
+    background-image:url('../sprite/mine.svg');
+    background-size:100%;
+}
