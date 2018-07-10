@@ -56,7 +56,12 @@
             $('.pixel').on('mousedown',function(ev){
                 if(ev.which === 3){
                     var pixel = ev.currentTarget.id;
-                    campo_minado.bandeira(pixel);
+                    var div = document.getElementById(pixel).getAttribute('class');
+                    if(div == 'pixel flag'){
+                        campo_minado.tirar_bandeira(pixel);
+                    }else{
+                        campo_minado.bandeira(pixel);
+                    }
                 }
             });
         </script>

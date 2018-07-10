@@ -41,9 +41,13 @@ var campo_minado = class{
             x = 1;
             y++;
         }
+        this.fim1 = 0;
     }
     fim(){
         //window.location = "index.html";
+        alert('Fim de jogo!');
+        this.display_tudo();
+        pixel.removeAttribute('onclick');
     }
     
     colocar_bombas(dif,x,y){
@@ -82,38 +86,58 @@ var campo_minado = class{
         this.atualizar_display();
     }
     atualizar_display(){
+        for(var o = 1; o <= 3; o++){
+            var disp = document.getElementById('d'+o);
+            disp.setAttribute('class','d d0');
+        }
         var bombinhas = this.qt_bomba;
         bombinhas = String(bombinhas);
-        if(bombinhas.length <= 3){
-            var array = bombinhas.split("");
-            console.log(array.length);
-            var i = 1;
+        
+        var array = bombinhas.split("");
+        console.log(array.length);
+        var i = 2;
 
-            if(array.length < 3){
-                if(array.length < 2){
-                    var d = document.getElementById('d'+2);
-                    d.setAttribute('class','d d0');
-                    i++;
+        while(i >= 0){
+            if(array.length == 3){
+                var disp = document.getElementById('d'+(i+1));
+                disp.setAttribute('class','d d'+array[i]);
+            }else if(array.length == 2){
+                if(i == 0){
+
+                }else{
+                    var disp = document.getElementById('d'+(i+1));
+                    console.log('aaaaa'+i+1);
+                    disp.setAttribute('class','d d'+array[(i-1)]);
                 }
-                var d = document.getElementById('d'+1);
-                d.setAttribute('class','d d0');
-                i++;
+            }else if(array.length == 1){
+                if(i == 0 || i == 1){
+
+                }else{
+                    var disp = document.getElementById('d'+(i+1));
+                    disp.setAttribute('class','d d'+array[(i-2)]);
+                }
             }
-            console.log(i);
-
-            while(i <= array.length){
-                var d = document.getElementById('d'+i);
-                console.log(d);
-
-                d.setAttribute('class','d d'+array[i-1]);
-
-                i++;
-            }
-
-        }else{
-            alert('Ocorreu um problema com a quantidade de bombas!');
-            window.location = "index.html";
+            i--;
         }
+
+        // while(i <= array.length){
+        //     var d = document.getElementById('d'+i);
+        //     console.log(d);
+
+        //     d.setAttribute('class','d d'+array[i-1]);
+
+        //     i++;
+        // }
+
+
+        // while(i <= array.length){
+        //     var d = document.getElementById('d'+i);
+        //     console.log(d);
+
+        //     d.setAttribute('class','d d'+array[i-1]);
+
+        //     i++;
+        // }
     }
 
     colocar_numeros(){
@@ -386,7 +410,7 @@ var campo_minado = class{
             while(x <= this.x){
                 if(this.casas[y][x] != "B"){
                     if(this.casas[y][x] != 0){
-                        this.mostrar_casa(y+"_"+x,y,x);
+                        this.mostrar_casa_fim(y+"_"+x,y,x);
                     }else{
 
                     }
@@ -406,13 +430,15 @@ var campo_minado = class{
             while(x <= this.x){
                 if(this.casas[y][x] != "B"){
                     if(this.casas[y][x] != 0){
-                        this.mostrar_casa(y+"_"+x,y,x);
+                        this.mostrar_casa_fim(y+"_"+x,y,x);
                     }else{
-                        this.mostrar_casa(y+"_"+x,y,x);
+                        this.mostrar_casa_fim(y+"_"+x,y,x);
                     }
                 }else{
-                    this.mostrar_casa(y+"_"+x,y,x);
+                    this.mostrar_casa_fim(y+"_"+x,y,x);
                 }
+                var pixel = document.getElementById(y+"_"+x);
+                pixel.removeAttribute('onclick');
                 
                 x++;
             }
@@ -426,7 +452,6 @@ var campo_minado = class{
         this.icone_cor_casas(this.casas[y][x],pixel);
 
         if(this.casas[y][x] == "B"){
-            alert('Fim de jogo!');
             this.fim();
         }else if(this.casas[y][x] == 0){
             //this.casas_perto(y,x);
@@ -470,12 +495,24 @@ var campo_minado = class{
             //this.casas_perto(y,x);
         }
     }
+    mostrar_casa_fim(nome,y,x){
+        var pixel = document.getElementById(nome);
+        this.icone_cor_casas(this.casas[y][x],pixel);
+    }
+    
     bandeira(id){
         var elem = document.getElementById(id);
         elem.setAttribute('class','pixel flag');
 
         this.qt_bomba--;
-        atualizar_display.atualizar_display();
+        this.atualizar_display();
+    }
+    tirar_bandeira(id){
+        var elem = document.getElementById(id);
+        elem.setAttribute('class','pixel');
+
+        this.qt_bomba++;
+        this.atualizar_display();
     }
 
     
