@@ -1,88 +1,123 @@
+//Classe contendo todas as funções do campo minado
 var campo_minado = class{
     constructor(){
         
     }
-    criar_campo(x,y){
-        this.x = x;
-        this.y = y;
 
-        var campo = document.getElementById('campo');
+    //Método para criar o campo minado
+    criar_campo(x,y){
+        this.x = x; //Define a largura do campo
+        this.y = y; //Define a altura do campo
+
+        var campo = document.getElementById('campo'); 
     
+        //Define o tamanho (em pixels) do campo, com base no número de campos/dificuldade escolhidos pelo usuário
         var campo_width = x*25;
         var campo_height = y*25;
+
+        campo.style.width = parseInt(campo_width)+"px";
+        campo.style.height = parseInt(campo_height)+"px";
     
-        campo.style.width = parseFloat(campo_width)+"px";
-        campo.style.height = parseFloat(campo_height)+"px";
-    
-        var j = 1;
-    
+        //Define o número total de campos do campo minado
         var campos = x*y;
         this.campos = campos;
 
+        //Define as variaveis que serão utilizadas em um while
         x = 1;
         y = 1;
-        this.casas = [];
+        this.casas = [];  //Declara o array que receberá o valor de cada casa, guardando quais delas são bombas, vazias, etc.
 
+        //Incia o loop pela linha de campos (do campo minado)
         while(y <= this.y){
+            //Adiciona o indice y no array casas, e o define como um novo array 
             this.casas[y] = [];
-            while(x <= this.x){
-                var pixel = document.createElement("div");
-                pixel.setAttribute("id",y+"_"+x);
-                pixel.setAttribute("class","pixel");
-                pixel.setAttribute("onclick","campo_minado.mostrar_casa('"+y+"_"+x+"',"+y+","+x+")");
-                pixel.setAttribute("grupo","");
-                campo.appendChild(pixel);
 
+            //Inicia um novo loop, passando por cada coluna da linha
+            while(x <= this.x){
+
+                //Cria um elemento 'div'
+                var pixel = document.createElement("div");
+                pixel.setAttribute("id",y+"_"+x);    //Define seu id como a linha+'_'+coluna que pertence
+                pixel.setAttribute("class","pixel"); //Define sua class como 'pixel' (class que contém o estilo de um quadrado do campo)
+                pixel.setAttribute("onclick","campo_minado.mostrar_casa('"+y+"_"+x+"',"+y+","+x+")");  //Define que ao clicada, essa div chamará a função 'mostrar_casa', usando o valor de seu id como parâmetro 
+                pixel.setAttribute("grupo","");      //Define o atributo grupo
+                campo.appendChild(pixel);            //Adiciona o elemento ao campo minado
+
+                //Define o valor incial do campo como 0
                 this.casas[y][x] = 0;
-                j++;
 
                 x++;
             }
             x = 1;
             y++;
         }
-        this.fim1 = 0;
     }
+
+    //Método que finaliza o jogo
     fim(){
-        //window.location = "index.html";
         alert('Fim de jogo!');
+
+        //Abre todos os campos do campo minado
         this.display_tudo();
-        pixel.removeAttribute('onclick');
+
+        //Verifica se o usuário clicou no campo para resetar
+        var o = 0;
+        $('#campo').on('click',function(){
+            o++;
+            if(o == 1){
+
+            }else{
+                window.location = "index.html";
+            }
+        });
     }
     
+    //Método que distribui as bombas no campo
     colocar_bombas(dif,x,y){
+        //Guarda a dificuldade na classe
         this.dif = dif;
 
-        if(dif == 4){
+        if(dif == 4){        //Personalizar
+            //Cria um campo com os valores dados pelo usuário
             this.criar_campo(x,y);
-            this.qt_bomba = this.campos/8;
-        }else if(dif == 1){
-            this.qt_bomba = 10;
-            this.criar_campo(9,9);
-        }else if(dif == 2){
-            this.qt_bomba = 40;
-            this.criar_campo(16,16);
-        }else if(dif == 3){
-            this.qt_bomba = 99;
-            this.criar_campo(30,16);
+
+            //Define quantas bombas terá o campo
+            this.qt_bomba = this.campos/8; // Um oitavo dos campos serão bombas
+        }else if(dif == 1){  //Fácil 
+            this.qt_bomba = 10;     //Quantidade de bombas
+            this.criar_campo(9,9);  //Define o campo
+        }else if(dif == 2){  //Médio
+            this.qt_bomba = 40;     //Quantidade de bombas
+            this.criar_campo(16,16);//Define o campo
+        }else if(dif == 3){  //Difícil
+            this.qt_bomba = 99;     //Quantidade de bombas
+            this.criar_campo(30,16);//Define o campo
         }
 
+        //Prepara variaveis para o While
         var x = 1;
         var y = 1;
+        var c = 1;  //Representa a quantidade de bombas já colocadas no campo
 
-        var c = 1;
-        while(c <= this.qt_bomba){
-            var r_y = Math.floor((Math.random() * this.y) + 1);
+        while(c <= this.qt_bomba){ //Enquanto a quantidade de bombas colocadas for menos que a quantidade de bombas que precisam existir
+            
+            //Pega uma posição aleatória
+            var r_y = Math.floor((Math.random() * this.y) + 1); 
             var r_x = Math.floor((Math.random() * this.x) + 1);
             var pixel = document.getElementById(r_y+"_"+r_x);
 
+            //Verifica se ela está vazia            
             if(this.casas[r_y][r_x] == 0){
+
+                //Coloca uma bomba
                 this.casas[r_y][r_x] = 'B';
+                c++;  //Aumenta o contador de bombas colocadas
             }else{
-                c--;
+                //Já existe uma bomba nessa casa
             }
-            c++;
         }
+        
+        //Atualiza o número de bombas exibidos no HTML
         this.atualizar_display();
     }
     atualizar_display(){
