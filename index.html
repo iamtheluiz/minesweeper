@@ -7,59 +7,94 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8">
     </head>
-    <body>
-        <div class="menu">
-            <div class="bombas">
-                <div class="dh"></div>
-                <div id="d1" class="d d0"></div>
-                <div id="d2" class="d d0"></div>
-                <div id="d3" class="d d0"></div>
+    <body oncontextmenu="return false">
+        <div id="jogo">
+            <!-- Inicio do topo da div -->
+            <div class="menu">
+
+                <!-- Contador de bombas -->
+                <div class="bombas">
+
+                    <!-- Div para dar espaço no inicio -->
+                    <div class="dh"></div>
+
+                    <!-- Divs que contém os números -->
+                    <div id="d1" class="d d0"></div>
+                    <div id="d2" class="d d0"></div>
+                    <div id="d3" class="d d0"></div>
+
+                </div>
+
+                <!-- Botão para reset do jogo -->
+                <div class="reset">
+
+                </div>
+
+                <!-- Quantidade de cliques do jogador -->
+                <div class="cliques">
+                    
+                </div>
             </div>
-            <div class="reset">
+            <!-- Fim do topo da div -->
+
+            <!-- Inicio do corpo da div -->
+            <div class="content">
+
+                <!-- Campo minado -->
+                <div id="campo">
+                    
+                </div>
 
             </div>
-            <div class="cliques">
-                
-            </div>
-        </div>
-        <div class="content" oncontextmenu="return false">
-            <div id="campo">
-                
-            </div>
+            <!-- Fim do corpo da div -->
         </div>
         <!--Scripts-->
-        <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script type="text/javascript">
-            //colocar_bombas(1,20,20);
-            //colocar_numeros();
-            //console.table(casas);
 
+        <!-- Script que contém o código do campo minado  -->
+        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript">
+            //Instância do campo minado
             var campo_minado = new campo_minado;
 
+            //Exibe um prompt pedindo a seleção de uma dificuldade
             var dif = prompt('Qual a dificuldade desejada? \n 1- Fácil  2- Médio  3- Difícil  4- Personalizar');
-            dif = parseInt(dif);
-            if(dif == 4){
+            dif = parseInt(dif);  //Transforma o valor retornado em numérico
+            if(dif == 4){  //Caso deseje um campo personalizado ele questiona quais são os tamanhos desejados
                 var x = parseInt(prompt('Quantos campos de largura?'));
                 var y = parseInt(prompt('Quantos campos de altura?'));
-            }else{
+            }else{ //Caso seja um campo predefinido, os valores não precisam ser definidos aqui, mas sim dentro da função 'colocar_bombas'
                 var x = 0;
                 var y = 0;
             }
 
+            //Com base nas escolhas do usuário, as bombas são colocadas
             campo_minado.colocar_bombas(dif,x,y);
+
+            //Essa linha define, após as bombas serem distribuidas, quais são os números das casas em volta
             campo_minado.colocar_numeros();
+
+            //Essa função serve para agrupar as casas que tem o valor 0 (essa parta ainda está em desenvolvimento)
             campo_minado.agrupar_vazios();
+
+            //Debug
             console.table(campo_minado.casas);
 
+            //Função que verifica o click do usuário em cima de um 'pixel' do campo
             $('.pixel').on('mousedown',function(ev){
+                //Caso ele tenha clicado com o botão direito 
                 if(ev.which === 3){
+                    //Ele pega o id da div em que o usuário clicou
                     var pixel = ev.currentTarget.id;
+
+                    //coloca dentro da variavel 'div' o valor dentro de seu atributo 'class'
                     var div = document.getElementById(pixel).getAttribute('class');
-                    if(div == 'pixel flag'){
+                    if(div == 'pixel flag'){ //Caso sua class possua 'flag' (seja uma bandeira)
+                        //Ele retira a bandeira do pixel
                         campo_minado.tirar_bandeira(pixel);
-                    }else{
+                    }else{ //Caso não possua 'flag' na class
+                        //Ele define o pixel como uma bandeira
                         campo_minado.bandeira(pixel);
                     }
                 }
