@@ -1,0 +1,9 @@
+2018-07-11 - 0.1 - Luiz Gustavo da Silva Vasconcellos
+
+    * Introduzindo a versão demo do software
+    * Função de abrir grupo adicionada
+    * Adicionado display com o número de bombas
+    * Estilo redefinido
+    * Adicionadas bandeiras (não concluidas)
+    - Persiste um bug ao abrir grupos, onde nem todos os pixels são mostrados
+    - Bandeira ainda pode ser clicada
